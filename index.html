@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Монетки</title>
+<style>
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+margin: 0;
+font-family: Arial, sans-serif;
+background: linear-gradient(to bottom, white, lightblue);
+transition: background 0.5s ease;
+user-select: none;
+-webkit-tap-highlight-color: transparent; /* Отключение синего выделения на телефоне */
+}
+
+#coin {
+  font-size: 24px;
+  margin-bottom: 20px;
+  transition: color 0.5s ease;
+  margin-top: 220px;
+}
+
+#upgradeInfo {
+  transition: color 0.5s ease;
+  margin-bottom: 20px;
+}
+
+img {
+  width: 200px;
+  cursor: pointer;
+  touch-action: manipulation; /* Разрешение множественных касаний на телефоне */
+}
+
+button, clickc, thema {
+  margin-top: -450px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  -webkit-tap-highlight-color: transparent; /* Отключение синего выделения на телефоне */
+}
+
+clickc {
+  margin-top: 510px;
+}
+
+thema {
+  margin-top: -440px;
+  margin-left: 340px;
+}
+
+button:hover {
+  background-color: #555;
+}
+</style>
+</head>
+<body>
+<div id="coin">Монеток: 0</div>
+<img id="coinImage" src="assets/image.png" />
+<thema id="themeButton">☀️</thema>
+<clickc id="upgradeButton">Прокачать клик (+0.1 монета)</clickc>
+<div id="upgradeInfo">Стоимость прокачки: 100 монет</div>
+
+<script>
+// Функция для сохранения количества монет в localStorage
+function saveCoins() {
+localStorage.setItem('coinCount', coinCount);
+localStorage.setItem('clickValue', clickValue);
+localStorage.setItem('upgradePrice', upgradePrice);
+}
+
+// Функция для загрузки количества монет из localStorage
+function loadCoins() {
+  coinCount = parseFloat(localStorage.getItem('coinCount')) || 0;
+  clickValue = parseFloat(localStorage.getItem('clickValue')) || 1;
+  upgradePrice = parseInt(localStorage.getItem('upgradePrice')) || 100;
+  coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+  upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
+}
+
+// Инициализируем количество монеток и стоимость прокачки
+let coinCount = 0;
+let clickValue = 1;
+let upgradePrice = 100;
+
+// Получаем элементы из DOM
+const coinDisplay = document.getElementById('coin');
+const coinImage = document.getElementById('coinImage');
+const themeButton = document.getElementById('themeButton');
+const upgradeButton = document.getElementById('upgradeButton');
+const upgradeInfoDisplay = document.getElementById('upgradeInfo');
+
+// Загружаем количество монет из localStorage
+loadCoins();
+
+// Функция для увеличения количества монеток
+coinImage.addEventListener('touchstart', () => {
+  coinCount += clickValue;
+  coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+  saveCoins();
+}, { passive: true }); // Отключение стандартного поведения браузера для множественных касаний
+
+// Функция для прокачки клика
+upgradeButton.addEventListener('touchstart', () => {
+  if (coinCount >= upgradePrice) {
+    coinCount -= upgradePrice;
+    clickValue += 0.1;
+    upgradePrice *= 2;
+    coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+    upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
+    saveCoins();
+  }
+}, { passive: true }); // Отключение стандартного поведения браузера для множественных касаний
+
+// Функция для смены темы
+let isDarkTheme = false;
+themeButton.addEventListener('touchstart', () => {
+  if (isDarkTheme) {
+    document.body.style.background = 'linear-gradient(to bottom, white, lightblue)';
+    coinDisplay.style.color = '#000';
+    upgradeInfo.style.color = '#000';
+  } else {
+    document.body.style.background = 'linear-gradient(to bottom, #000, #444)';
+    coinDisplay.style.color = '#fff';
+    upgradeInfo.style.color = '#fff';
+  }
+  isDarkTheme = !isDarkTheme;
+}, { passive: true }); // Отключение стандартного поведения браузера для множественных касаний
+</script>
+</body>
+</html>
