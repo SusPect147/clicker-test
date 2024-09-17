@@ -1,141 +1,213 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Монетки</title>
-<style>
-body {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 100vh;
-margin: 0;
-font-family: Arial, sans-serif;
-background: linear-gradient(to bottom, white, lightblue);
-transition: background 0.5s ease;
-user-select: none;
--webkit-tap-highlight-color: transparent; /* Отключение синего выделения на телефоне */
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Монетки</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, white, lightblue);
+      transition: background 0.5s ease;
+      user-select: none;
+    }
 
-#coin {
-  font-size: 24px;
-  margin-bottom: 20px;
-  transition: color 0.5s ease;
-  margin-top: 220px;
-}
+    #coin {
+      font-size: 24px;
+      margin-bottom: 20px;
+      transition: color 0.5s ease;
+      margin-top: 100px;
+    }
 
-#upgradeInfo {
-  transition: color 0.5s ease;
-  margin-bottom: 20px;
-}
+    #upgradeInfo {
+      transition: color 0.5s ease;
+      margin-bottom: 20px;
+    }
 
-img {
-  width: 200px;
-  cursor: pointer;
-  touch-action: manipulation; /* Разрешение множественных касаний на телефоне */
-}
+    img {
+      width: 200px;
+      cursor: pointer;
+    }
 
-button, clickc, thema {
-  margin-top: -450px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-  -webkit-tap-highlight-color: transparent; /* Отключение синего выделения на телефоне */
-}
+    img {
+      outline: none;
+      cursor: pointer;
+      pointer-events: auto;
+    }
 
-clickc {
-  margin-top: 510px;
-}
+    button, .clickc, .thema {
+      margin-top: -450px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: background-color 0.5s ease;
+      margin-right: 20px;
+    }
 
-thema {
-  margin-top: -440px;
-  margin-left: 340px;
-}
+    .clickc {
+      margin-top: 510px;
+      margin-right: 0;
+    }
 
-button:hover {
-  background-color: #555;
-}
-</style>
+    .thema {
+      margin-top: -440px;
+      margin-left: 320px;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    #codeMenu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      display: none;
+    }
+
+    #codeInput {
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #codeButton, #codeSubmit {
+      padding: 5px 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
-<div id="coin">Монеток: 0</div>
-<img id="coinImage" src="image.png" />
-<thema id="themeButton">☀️</thema>
-<clickc id="upgradeButton">Прокачать клик (+0.1 монета)</clickc>
-<div id="upgradeInfo">Стоимость прокачки: 100 монет</div>
+  <div id="coin">Монеток: 0</div>
+  <img id="coinImage" src="image.png" />
+  <button class="thema" id="themeButton">☀️</button>
+  <button class="clickc" id="upgradeButton">Прокачать клик (+0.1 монета)</button>
+  <div id="upgradeInfo">Стоимость прокачки: 100 монет</div>
+  <codes id="codeButton">Коды</codes>
+  <div id="codeMenu">
+    <input type="text" id="codeInput" placeholder="Введите промокод">
+    <button id="codeSubmit">Применить</button>
+  </div>
 
-<script>
-// Функция для сохранения количества монет в localStorage
-function saveCoins() {
-localStorage.setItem('coinCount', coinCount);
-localStorage.setItem('clickValue', clickValue);
-localStorage.setItem('upgradePrice', upgradePrice);
-}
+  <script>
+    // Функция для сохранения количества монет в localStorage
+    function saveCoins() {
+      localStorage.setItem('coinCount', coinCount);
+      localStorage.setItem('clickValue', clickValue);
+      localStorage.setItem('upgradePrice', upgradePrice);
+      localStorage.setItem('codeUsed', codeUsed);
+    }
 
-// Функция для загрузки количества монет из localStorage
-function loadCoins() {
-  coinCount = parseFloat(localStorage.getItem('coinCount')) || 0;
-  clickValue = parseFloat(localStorage.getItem('clickValue')) || 1;
-  upgradePrice = parseInt(localStorage.getItem('upgradePrice')) || 100;
-  coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
-  upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
-}
+    // Функция для загрузки количества монет из localStorage
+    function loadCoins() {
+      coinCount = parseFloat(localStorage.getItem('coinCount')) || 0;
+      clickValue = parseFloat(localStorage.getItem('clickValue')) || 1;
+      upgradePrice = parseInt(localStorage.getItem('upgradePrice')) || 100;
+      codeUsed = localStorage.getItem('codeUsed') === 'true' || false;
+      coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+      upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
+    }
 
-// Инициализируем количество монеток и стоимость прокачки
-let coinCount = 0;
-let clickValue = 1;
-let upgradePrice = 100;
+    // Инициализируем количество монеток, стоимость прокачки и флаг использования промокода
+    let coinCount = 0;
+    let clickValue = 1;
+    let upgradePrice = 100;
+    let codeUsed = false;
 
-// Получаем элементы из DOM
-const coinDisplay = document.getElementById('coin');
-const coinImage = document.getElementById('coinImage');
-const themeButton = document.getElementById('themeButton');
-const upgradeButton = document.getElementById('upgradeButton');
-const upgradeInfoDisplay = document.getElementById('upgradeInfo');
+    // Получаем элементы из DOM
+    const coinDisplay = document.getElementById('coin');
+    const coinImage = document.getElementById('coinImage');
+    const themeButton = document.getElementById('themeButton');
+    const upgradeButton = document.getElementById('upgradeButton');
+    const upgradeInfoDisplay = document.getElementById('upgradeInfo');
+    const codeButton = document.getElementById('codeButton');
+    const codeMenu = document.getElementById('codeMenu');
+    const codeInput = document.getElementById('codeInput');
+    const codeSubmit = document.getElementById('codeSubmit');
 
-// Загружаем количество монет из localStorage
-loadCoins();
+    // Загружаем количество монет из localStorage
+    loadCoins();
 
-// Функция для увеличения количества монеток
-coinImage.addEventListener('touchstart', () => {
-  coinCount += clickValue;
-  coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
-  saveCoins();
-}, { passive: true }); // Отключение стандартного поведения браузера для множественных касаний
+    // Функция для увеличения количества монеток
+    coinImage.addEventListener('click', () => {
+      coinCount += clickValue;
+      coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+      saveCoins();
+    });
 
-// Функция для прокачки клика
-upgradeButton.addEventListener('touchstart', () => {
-  if (coinCount >= upgradePrice) {
-    coinCount -= upgradePrice;
-    clickValue += 0.1;
-    upgradePrice *= 2;
-    coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
-    upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
-    saveCoins();
-  }
-}, { passive: true }); // Отключение стандартного поведения браузера для множественных касаний
+    // Функция для прокачки клика
+    upgradeButton.addEventListener('click', () => {
+      if (coinCount >= upgradePrice) {
+        coinCount -= upgradePrice;
+        clickValue += 0.1;
+        upgradePrice *= 2;
+        coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+        upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
+        saveCoins();
+      }
+    });
 
-// Функция для смены темы
-let isDarkTheme = false;
-themeButton.addEventListener('touchstart', () => {
-  if (isDarkTheme) {
-    document.body.style.background = 'linear-gradient(to bottom, white, lightblue)';
-    coinDisplay.style.color = '#000';
-    upgradeInfo.style.color = '#000';
-  } else {
-    document.body.style.background = 'linear-gradient(to bottom, #000, #444)';
-    coinDisplay.style.color = '#fff';
-    upgradeInfo.style.color = '#fff';
-  }
-  isDarkTheme = !isDarkTheme;
-}, { passive: true }); // Отключение стандартного поведения браузера для множественных касаний
-</script>
+    // Функция для смены темы
+    let isDarkTheme = false;
+    themeButton.addEventListener('click', () => {
+      if (isDarkTheme) {
+        document.body.style.background = 'linear-gradient(to bottom, white, lightblue)';
+        coinDisplay.style.color = '#000';
+        upgradeInfo.style.color = '#000';
+      } else {
+        document.body.style.background = 'linear-gradient(to bottom, #000, #444)';
+        coinDisplay.style.color = '#fff';
+        upgradeInfo.style.color = '#fff';
+      }
+      isDarkTheme = !isDarkTheme;
+    });
+
+    // Функция для открытия/закрытия меню "Коды"
+    codeButton.addEventListener('click', () => {
+      codeMenu.style.display = 'block';
+    });
+
+    codeMenu.addEventListener('click', (event) => {
+      if (event.target === codeMenu) {
+        codeMenu.style.display = 'none';
+      }
+    });
+
+    // Функция для применения промокода
+    codeSubmit.addEventListener('click', () => {
+      const code = codeInput.value.trim();
+      if (code === 'ImWinner' && !codeUsed) {
+        coinCount += 100000;
+        coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+        codeUsed = true;
+        saveCoins();
+        codeMenu.style.display = 'none';
+      } else {
+        alert('Неверный промокод или он уже был использован!');
+        codeMenu.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
