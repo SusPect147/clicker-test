@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Монетки</title>
 <style>
-/* Стили для страницы */
 body {
 display: flex;
 flex-direction: column;
@@ -18,28 +17,22 @@ background: linear-gradient(to bottom, white, lightblue);
 transition: background 0.5s ease;
 user-select: none;
 }
-
-/* Стили для отображения монеток */
 #coin {
   font-size: 24px;
   margin-bottom: 20px;
   transition: color 0.5s ease;
   margin-top: 140px;
 }
-
 #upgradeInfo {
   transition: color 0.5s ease;
   margin-bottom: 20px;
 }
-
-/* Стили для изображения монетки */
 img {
   width: 200px;
   cursor: pointer;
+  outline: none;
   pointer-events: auto;
 }
-
-/* Стили для кнопок */
 button, .clickc, .thema {
   margin-top: -450px;
   padding: 10px 20px;
@@ -52,22 +45,17 @@ button, .clickc, .thema {
   transition: background-color 0.5s ease;
   margin-right: 20px;
 }
-
 .clickc {
   margin-top: 510px;
   margin-right: 0;
 }
-
 .thema {
   margin-top: -440px;
   margin-left: 320px;
 }
-
 button:hover {
   background-color: #555;
 }
-
-/* Стили для меню "Коды" */
 #codeMenu {
   position: absolute;
   top: 50%;
@@ -79,14 +67,12 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   display: none;
 }
-
 #codeInput {
   margin-bottom: 10px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
 #codeButton, #codeSubmit {
   padding: 5px 10px;
   background-color: #333;
@@ -101,15 +87,14 @@ button:hover {
 <body>
 <div id="coin">Монеток: 0</div>
 <img id="coinImage" src="image.png" />
-<thema id="themeButton">☀️</thema>
-<clickc id="upgradeButton">Прокачать клик (+0.1 монета)</clickc>
+<button class="thema" id="themeButton">🌙</button>
+<button class="clickc" id="upgradeButton">Прокачать клик (+0.1 монета)</button>
 <div id="upgradeInfo">Стоимость прокачки: 100 монет</div>
 <codes id="codeButton">Коды</codes>
 <div id="codeMenu">
 <input type="text" id="codeInput" placeholder="Введите промокод">
 <button id="codeSubmit">Применить</button>
 </div>
-
 <script>
 function saveCoins() {
   localStorage.setItem('coinCount', coinCount);
@@ -148,7 +133,6 @@ coinImage.addEventListener('click', () => {
   coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
   saveCoins();
 });
-// Функция для прокачки клика
 upgradeButton.addEventListener('click', () => {
   if (coinCount >= upgradePrice) {
     coinCount -= upgradePrice;
@@ -159,23 +143,21 @@ upgradeButton.addEventListener('click', () => {
     saveCoins();
   }
 });
-
-// Функция для смены темы
 let isDarkTheme = false;
 themeButton.addEventListener('click', () => {
   if (isDarkTheme) {
     document.body.style.background = 'linear-gradient(to bottom, white, lightblue)';
     coinDisplay.style.color = '#000';
     upgradeInfo.style.color = '#000';
+    themeButton.textContent = '🌙';
   } else {
     document.body.style.background = 'linear-gradient(to bottom, #000, #444)';
     coinDisplay.style.color = '#fff';
     upgradeInfo.style.color = '#fff';
+    themeButton.textContent = '🌟';
   }
   isDarkTheme = !isDarkTheme;
 });
-
-// Функция для открытия/закрытия меню "Коды"
 codeButton.addEventListener('click', () => {
   codeMenu.style.display = 'block';
 });
@@ -185,11 +167,9 @@ codeMenu.addEventListener('click', (event) => {
     codeMenu.style.display = 'none';
   }
 });
-
-// Функция для применения промокода
 codeSubmit.addEventListener('click', () => {
   const code = codeInput.value.trim();
-  if (code === 'ImWinner' && !codeUsed) {
+  if (code === 'ImWinner_NECHTO' && !codeUsed) {
     coinCount += 100000;
     coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
     codeUsed = true;
