@@ -152,7 +152,7 @@ loadCoins();
 // Функция для увеличения количества монеток
 coinImage.addEventListener('click', () => {
   coinCount += clickValue;
-  coinDisplayContent = `Монеток: ${coinCount.toFixed(1)}`;
+  coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
   saveCoins();
 });
 
