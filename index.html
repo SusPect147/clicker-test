@@ -111,15 +111,13 @@ button:hover {
 </div>
 
 <script>
-// Функция для сохранения количества монет в localStorage
 function saveCoins() {
-localStorage.setItem('coinCount', coinCount);
-localStorage.setItem('clickValue', clickValue);
-localStorage.setItem('upgradePrice', upgradePrice);
-localStorage.setItem('codeUsed', codeUsed);
+  localStorage.setItem('coinCount', coinCount);
+  localStorage.setItem('clickValue', clickValue);
+  localStorage.setItem('upgradePrice', upgradePrice);
+  localStorage.setItem('codeUsed', codeUsed);
 }
 
-// Функция для загрузки количества монет из localStorage
 function loadCoins() {
   coinCount = parseFloat(localStorage.getItem('coinCount')) || 0;
   clickValue = parseFloat(localStorage.getItem('clickValue')) || 1;
@@ -129,13 +127,10 @@ function loadCoins() {
   upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
 }
 
-// Инициализируем количество монеток, стоимость прокачки и флаг использования промокода
 let coinCount = 0;
 let clickValue = 1;
 let upgradePrice = 100;
 let codeUsed = false;
-
-// Получаем элементы из DOM
 const coinDisplay = document.getElementById('coin');
 const coinImage = document.getElementById('coinImage');
 const themeButton = document.getElementById('themeButton');
@@ -146,16 +141,13 @@ const codeMenu = document.getElementById('codeMenu');
 const codeInput = document.getElementById('codeInput');
 const codeSubmit = document.getElementById('codeSubmit');
 
-// Загружаем количество монет из localStorage
 loadCoins();
 
-// Функция для увеличения количества монеток
 coinImage.addEventListener('click', () => {
   coinCount += clickValue;
   coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
   saveCoins();
 });
-
 // Функция для прокачки клика
 upgradeButton.addEventListener('click', () => {
   if (coinCount >= upgradePrice) {
