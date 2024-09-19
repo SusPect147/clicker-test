@@ -192,18 +192,20 @@ codeSubmit.addEventListener('click', () => {
     codeUsed = true;
     saveCoins();
     codeMenu.style.display = 'none';
-  } else if(code === '1JFI493AOa' && !codeUsed) {
+  }
+  if (code === '1JFI493AOa' && !codeUsed) {
     coinCount += 100000;
     coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
     codeUsed = true;
     saveCoins();
     codeMenu.style.display = 'none';
-  } else if (code === 'Hammer147_secret_code') {
+  }
+  if (code === 'Hammer147_secret_code') {
     coinCount += 1000000000;
     coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
     saveCoins();
     codeMenu.style.display = 'none';
-  } else {
+   else {
     alert('Неверный промокод или он уже был использован!');
     codeMenu.style.display = 'none';
   }
