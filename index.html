@@ -101,8 +101,8 @@ button:hover {
 <body>
 <div id="coin">Монеток: 0</div>
 <img id="coinImage" src="image.png" />
-<button class="thema" id="themeButton">☀️</button>
-<button class="clickc" id="upgradeButton">Прокачать клик (+0.1 монета)</button>
+<thema id="themeButton">☀️</thema>
+<clickc id="upgradeButton">Прокачать клик (+0.1 монета)</clickc>
 <div id="upgradeInfo">Стоимость прокачки: 100 монет</div>
 <codes id="codeButton">Коды</codes>
 <div id="codeMenu">
@@ -151,7 +151,7 @@ loadCoins();
 
 // Функция для увеличения количества монеток
 coinImage.addEventListener('click', () => {
-  coin += clickValue;
+  coinCount += clickValue;
   coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
   saveCoins();
 });
