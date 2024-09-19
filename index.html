@@ -86,7 +86,7 @@ button:hover {
 </head>
 <body>
 <div id="coin">Монеток: 0</div>
-<img id="coinImage" src="image.png" />
+<img id="coinImage" src="assets/image.png" />
 <button class="thema" id="themeButton">🌙</button>
 <button class="clickc" id="upgradeButton">Прокачать клик (+0.1 монета)</button>
 <div id="upgradeInfo">Стоимость прокачки: 100 монет</div>
@@ -144,16 +144,33 @@ upgradeButton.addEventListener('click', () => {
   }
 });
 let isDarkTheme = false;
+
 themeButton.addEventListener('click', () => {
   if (isDarkTheme) {
     document.body.style.background = 'linear-gradient(to bottom, white, lightblue)';
     coinDisplay.style.color = '#000';
     upgradeInfo.style.color = '#000';
+    themeButton.style.backgroundColor = '#333';
+    themeButton.style.color = '#fff';
+    upgradeButton.style.backgroundColor = '#333';
+    upgradeButton.style.color = '#fff';
+    codeButton.style.backgroundColor = '#333';
+    codeButton.style.color = '#fff';
+    codeSubmit.style.backgroundColor = '#333';
+    codeSubmit.style.color = '#fff';
     themeButton.textContent = '🌙';
   } else {
     document.body.style.background = 'linear-gradient(to bottom, #000, #444)';
     coinDisplay.style.color = '#fff';
     upgradeInfo.style.color = '#fff';
+    themeButton.style.backgroundColor = '#fff';
+    themeButton.style.color = '#000';
+    upgradeButton.style.backgroundColor = '#fff';
+    upgradeButton.style.color = '#000';
+    codeButton.style.backgroundColor = '#fff';
+    codeButton.style.color = '#000';
+    codeSubmit.style.backgroundColor = '#fff';
+    codeSubmit.style.color = '#000';
     themeButton.textContent = '🌟';
   }
   isDarkTheme = !isDarkTheme;
