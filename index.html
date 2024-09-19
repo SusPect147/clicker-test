@@ -192,6 +192,14 @@ codeSubmit.addEventListener('click', () => {
     codeUsed = true;
     saveCoins();
     codeMenu.style.display = 'none';
+
+  const code = codeInput.value.trim();
+  if (code === '1JFI493AOa' && !codeUsed) {
+    coinCount += 100000;
+    coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+    codeUsed = true;
+    saveCoins();
+    codeMenu.style.display = 'none';
   } else if (code === 'Hammer147_secret_code') {
     coinCount += 1000000000;
     coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
