@@ -17,18 +17,43 @@ background: linear-gradient(to bottom, white, lightblue);
 transition: background 0.5s ease;
 user-select: none;
 }
+
+#message-container {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.error-message {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.success-message {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
 #coin {
   font-size: 24px;
   margin-bottom: 20px;
   transition: color 0.5s ease;
-  margin-top: 140px;
+  margin-top: -px;
 }
 #upgradeInfo {
   transition: color 0.5s ease;
-  margin-bottom: 10px;
+  margin-bottom: -450px;
 }
 img {
   width: 200px;
+  top: 40%;
   cursor: pointer;
   outline: none;
   pointer-events: auto;
@@ -52,29 +77,59 @@ button, .clickc, .thema {
 .thema {
   margin-top: -390px;
   margin-left: 320px;
+  
 }
 button:hover {
   background-color: #555;
 }
 #codeMenu {
   position: absolute;
-  top: 50%;
+  margin-left: 20px;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 30px;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   display: none;
+  height: 135px;
+}
+#codeMenu::after {
+content: "Коды:\AWORK_CODES (+10К монет)";
+display: block;
+margin-top: 20px;
+text-align: center;
+white-space: pre-line;
+font-size: 18px;
+animation: rainbow 5s linear infinite;
+}
+
+@keyframes rainbow {
+0% { color: red; }
+16.67% { color: orange; }
+33.33% { color: yellow; }
+50% { color: green; }
+66.67% { color: blue; }
+83.33% { color: indigo; }
+100% { color: violet; }
+0% { color: red; }
+16.67% { color: orange; }
+33.33% { color: yellow; }
+50% { color: green; }
+66.67% { color: blue; }
+83.33% { color: indigo; }
+100% { color: violet; }
 }
 #codeInput {
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 #codeButton, #codeSubmit {
-  padding: 5px 10px;
+  padding: 10px 10px;
+  margin-top: 20px;
   background-color: #333;
   color: #fff;
   border: none;
@@ -82,9 +137,68 @@ button:hover {
   cursor: pointer;
   margin-right: 10px;
 }
+.button2{
+  margin-top: -100px;
+  margin-left: 100px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  margin-right: 20px;
+}
+
+.button3{
+  margin-top: 100px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+    #inventory {
+      top: 50%;
+      left: 45%;
+      position: absolute;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      display: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .item {
+      display: inline-block;
+      margin: 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .item img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .item span {
+      display: block;
+      font-size: 12px;
+    }
+
+
+
 </style>
 </head>
 <body>
+<div id="message-container"></div>
 <div id="coin">Монеток: 0</div>
 <img id="coinImage" src="image.png" />
 <button class="thema" id="themeButton">🌙</button>
@@ -95,36 +209,70 @@ button:hover {
 <input type="text" id="codeInput" placeholder="Введите промокод">
 <button id="codeSubmit">Применить</button>
 </div>
+<div id="errorMessage" style="color: red; font-weight: bold; margin-top: 10px;"></div>
+<div id="inventory">
+  <h2>Инвентарь</h2>
+  <div id="items"></div>
+</div>
+<button2 id="inventoryButton">Инвентарь</button2>
+<button3 class="clickc" id="upgradeButton2">Прокачать удачу</button3>
+<div id="upgradeInfo2">Стоимость прокачки: 100 монет</div>
 <script>
 function saveCoins() {
-  localStorage.setItem('coinCount', coinCount);
-  localStorage.setItem('clickValue', clickValue);
-  localStorage.setItem('upgradePrice', upgradePrice);
-  localStorage.setItem('codeUsed', codeUsed);
+localStorage.setItem('coinCount', coinCount);
+localStorage.setItem('clickValue', clickValue);
+localStorage.setItem('upgradePrice', upgradePrice);    // Сохраняем цену прокачки
+localStorage.setItem('upgradePrice2', upgradePrice2); // Сохраняем цену прокачки
+localStorage.setItem('codeUsed', codeUsed);
+localStorage.setItem('items', JSON.stringify(items));
+
+localStorage.setItem('rare', rare);
+localStorage.setItem('epic', epic);
+localStorage.setItem('mythic', mythic);
+localStorage.setItem('legendary', legendary);
+localStorage.setItem('secret', secret);
 }
 
 function loadCoins() {
-  coinCount = parseFloat(localStorage.getItem('coinCount')) || 0;
-  clickValue = parseFloat(localStorage.getItem('clickValue')) || 1;
-  upgradePrice = parseInt(localStorage.getItem('upgradePrice')) || 100;
-  codeUsed = localStorage.getItem('codeUsed') === 'true' || false;
-  coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
-  upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
-}
+coinCount = parseFloat(localStorage.getItem('coinCount')) || 0;
+clickValue = parseFloat(localStorage.getItem('clickValue')) || 1;
+upgradePrice = parseInt(localStorage.getItem('upgradePrice')) || 100; // Загружаем цену прокачки
+upgradePrice2 = parseInt(localStorage.getItem('upgradePrice2')) || 500; // Загружаем цену второй прокачки
+codeUsed = localStorage.getItem('codeUsed') === 'true' || false;
+coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
+upgradeInfoDisplay2.textContent = `Стоимость прокачки: ${upgradePrice2} монет`;
+const storedItems = localStorage.getItem('items');
+return storedItems ? JSON.parse(storedItems) : [];
 
+rare = parseFloat(localStorage.getItem('rare'))
+epic = parseFloat(localStorage.getItem('epic'))
+mythic = parseFloat(localStorage.getItem('mythic'))
+legendary = parseFloat(localStorage.getItem('legendary'))
+secret = parseFloat(localStorage.getItem('secret'))
+}
 let coinCount = 0;
 let clickValue = 1;
 let upgradePrice = 100;
 let codeUsed = false;
+let rare =      0.1;
+let epic =      0.01;
+let mythic =    0.001;
+let legendary = 0.0001;
+let secret =    0.00001;
+let upgradePrice2 = 500;
 const coinDisplay = document.getElementById('coin');
 const coinImage = document.getElementById('coinImage');
 const themeButton = document.getElementById('themeButton');
 const upgradeButton = document.getElementById('upgradeButton');
+const upgradeButton2 = document.getElementById('upgradeButton2');
 const upgradeInfoDisplay = document.getElementById('upgradeInfo');
+const upgradeInfoDisplay2 = document.getElementById('upgradeInfo2');
 const codeButton = document.getElementById('codeButton');
 const codeMenu = document.getElementById('codeMenu');
 const codeInput = document.getElementById('codeInput');
 const codeSubmit = document.getElementById('codeSubmit');
+
 
 loadCoins();
 
@@ -137,9 +285,24 @@ upgradeButton.addEventListener('click', () => {
   if (coinCount >= upgradePrice) {
     coinCount -= upgradePrice;
     clickValue += 0.1;
-    upgradePrice *= 2;
+    upgradePrice *= 1.5;
     coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
     upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} монет`;
+    saveCoins();
+  }
+});
+
+upgradeButton2.addEventListener('click', () => {
+  if (coinCount >= upgradePrice2) {
+    coinCount -= upgradePrice2;
+    upgradePrice2 *= 2;
+    rare *= 1.2 ;
+    epic *= 1.2 ;
+    mythic *= 1.2 ;
+    legendary *= 1.2 ;
+    secret *= 1.2 ;  
+    coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+    upgradeInfoDisplay2.textContent = `Стоимость прокачки: ${upgradePrice2} монет`;
     saveCoins();
   }
 });
@@ -156,8 +319,6 @@ themeButton.addEventListener('click', () => {
     upgradeButton.style.color = '#fff';
     codeButton.style.backgroundColor = '#333';
     codeButton.style.color = '#fff';
-    codeSubmit.style.backgroundColor = '#333';
-    codeSubmit.style.color = '#fff';
     themeButton.textContent = '🌙';
   } else {
     document.body.style.background = 'linear-gradient(to bottom, #000, #444)';
@@ -169,8 +330,6 @@ themeButton.addEventListener('click', () => {
     upgradeButton.style.color = '#000';
     codeButton.style.backgroundColor = '#fff';
     codeButton.style.color = '#000';
-    codeSubmit.style.backgroundColor = '#fff';
-    codeSubmit.style.color = '#000';
     themeButton.textContent = '🌟';
   }
   isDarkTheme = !isDarkTheme;
@@ -184,6 +343,7 @@ codeMenu.addEventListener('click', (event) => {
     codeMenu.style.display = 'none';
   }
 });
+
 codeSubmit.addEventListener('click', () => {
   const code = codeInput.value.trim();
   if (code === 'ImWinner_NECHTO' && !codeUsed) {
@@ -192,24 +352,102 @@ codeSubmit.addEventListener('click', () => {
     codeUsed = true;
     saveCoins();
     codeMenu.style.display = 'none';
-  }
-  if (code === '1JFI493AOa' && !codeUsed) {
+    showMessage('Код успешно активирован!', 'success-message');
+  } else if (code === '1JFI493AOa' && !codeUsed) {
     coinCount += 100000;
     coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
     codeUsed = true;
     saveCoins();
     codeMenu.style.display = 'none';
-  }
-  if (code === 'Hammer147_secret_code') {
-    coinCount += 1000000000;
+    showMessage('Код успешно активирован!', 'success-message');
+  } else if (code === 'Hammer147_secret_code') {
+    coinCount += 100000000000000000000000;
     coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
     saveCoins();
     codeMenu.style.display = 'none';
-   else {
-    alert('Неверный промокод или он уже был использован!');
-    codeMenu.style.display = 'none';
+    showMessage('Код успешно активирован!', 'success-message');
+  } else {
+    showMessage('Неверный промокод или он уже был использован!', 'error-message');
   }
 });
+
+function showMessage(text, className) {
+  const messageContainer = document.getElementById('message-container');
+  messageContainer.textContent = text;
+  messageContainer.className = className;
+  messageContainer.style.opacity = '1';
+
+  setTimeout(() => {
+    messageContainer.style.opacity = '0';
+  }, 5000);
+}
+
+const inventoryButton = document.getElementById('inventoryButton');
+    const inventory = document.getElementById('inventory');
+    const itemsContainer = document.getElementById('items');
+
+    let items = loadItems() || [];
+
+    coinImage.addEventListener('click', () => {
+      const randomNumber = Math.random();
+      let item;
+
+      if (randomNumber < secret) {
+        item = { type: 'особый', count: 1, image: 'особый.png' };
+      } else if (randomNumber < secret + legendary) {
+        item = { type: 'легендарный', count: 1, image: 'легендарный.png' };
+      } else if (randomNumber < secret + legendary + mythic) {
+        item = { type: 'мифический', count: 1, image: 'мифический.png' };
+      } else if (randomNumber < secret + legendary + mythic + epic) {
+        item = { type: 'эпический', count: 1, image: 'эпический.png' };
+      } else if (randomNumber < secret + legendary + mythic + epic + rare) {
+        item = { type: 'редкий', count: 1, image: 'редкий.png' };
+      } else {
+        return; // Не выпал предмет
+      }
+
+      const existingItem = items.find(i => i.type === item.type);
+      if (existingItem) {
+        existingItem.count++;
+      } else {
+        items.push(item);
+      }
+
+      updateInventory();
+      saveItems(items);
+    });
+
+    inventoryButton.addEventListener('click', () => {
+      inventory.style.display = inventory.style.display === 'none' ? 'block' : 'none';
+    });
+
+    function updateInventory() {
+      itemsContainer.innerHTML = '';
+
+      items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item');
+
+        const itemImage = document.createElement('img');
+        itemImage.src = item.image;
+        itemElement.appendChild(itemImage);
+
+        const itemCount = document.createElement('span');
+        itemCount.textContent = `x${item.count}`;
+        itemElement.appendChild(itemCount);
+
+        itemsContainer.appendChild(itemElement);
+      });
+    }
+
+    function saveItems(items) {
+      localStorage.setItem('items', JSON.stringify(items));
+    }
+
+    function loadItems() {
+      const storedItems = localStorage.getItem('items');
+      return storedItems ? JSON.parse(storedItems) : [];
+    }
 </script>
 </body>
 </html>
