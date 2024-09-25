@@ -57,6 +57,11 @@ img {
   cursor: pointer;
   outline: none;
   pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img active {
+  box-shadow: 2px 2px 5px #fc894d;
 }
 button, .clickc, .thema {
   margin-top: -450px;
@@ -276,7 +281,7 @@ const codeSubmit = document.getElementById('codeSubmit');
 
 loadCoins();
 
-coinImage.addEventListener('click', () => {
+coinImage.addEventListener('dblclick', () => {
   coinCount += clickValue;
   coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
   saveCoins();
