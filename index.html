@@ -6,206 +6,175 @@
 <title>Монетки</title>
 <style>
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, rgb(11, 206, 255), rgb(243, 11, 212));
-    transition: background 0.5s ease;
-    user-select: none;
-    overflow: hidden; /* предотвращает выход элементов за пределы видимости */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, rgb(11, 206, 255), rgb(243, 11, 212));
+  transition: background 0.5s ease;
+  user-select: none;
+  overflow: hidden; 
+  transform: scale(0.8); /* Уменьшаем на 20% */
+  transform-origin: top; /* Устанавливаем точку масштабирования */
 }
+
 #message-container {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    z-index: 100;
-    opacity: 0;
-    transition: opacity 0.5s;
+  position: fixed;
+  top: 80px; /* Уменьшили значение */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px; /* Уменьшили отступы */
+  border-radius: 5px;
+  font-size: 13px; /* Уменьшили размер шрифта */
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
 .error-message {
   background-color: #ff4d4d;
   color: white;
 }
+
 .success-message {
   background-color: #4CAF50;
   color: white;
 }
+
 #coin {
-  font-size: 24px;
-  margin-bottom: 150px;
-  transition: color 0.5s ease;
-  margin-top: -px;
+  font-size: 19px; /* Уменьшили размер шрифта */
+  margin-bottom: 120px; /* Уменьшили отступ */
 }
+
 #upgradeInfo {
-  transition: color 0.5s ease;
-  margin-bottom: -460px;
+  margin-bottom: -370px; /* Изменили значение */
 }
+
 img {
-  width: 150px;
-  top: 40%;
+  width: 120px; /* Уменьшили размер изображения */
   cursor: pointer;
-  outline: none;
-  pointer-events: auto;
-  -webkit-tap-highlight-color: transparent;
 }
-img active {
-  box-shadow: 2px 2px 5px #fc894d;
-}
+
 button, .clickc, .thema {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: background-color 0.5s ease;
-    margin: 10px; /* добавим небольшой отступ */
-    max-width: 90%; /* ограничиваем ширину кнопки */
-    box-sizing: border-box; /* учитываем отступы и границы в ширине */
+  padding: 8px 16px; /* Уменьшили отступы */
+  font-size: 13px; /* Уменьшили размер шрифта */
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 32px; /* Уменьшили радиус */
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  margin: 8px;
+  max-width: 90%;
+  box-sizing: border-box; 
 }
-.clickc {
-  margin-top: 410px;
-  margin-right: 0;
-}
-.thema {
-  margin-top: -390px;
-  margin-left: 320px;
-}
+
 button:hover {
-    background-color: #555;
+  background-color: #555;
 }
+
 #codeMenu {
   position: absolute;
-  margin-left: 20px;
-  top: 40%;
+  margin-left: 16px; /* Уменьшили значение */
+  top: 32%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 30px;
+  padding: 24px; /* Уменьшили отступы */
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   display: none;
-  height: 135px;
-  transition: background 0.5s ease;
+  height: 108px; /* Уменьшили высоту */
 }
-#codeMenu::after {
- content: "Коды:\AWORK_CODES (+10К 🥥)";
- display: block;
- margin-top: 0px;
- text-align: center;
- white-space: pre-line;
- font-size: 18px;
- animation: rainbow 5s linear infinite;
-}
-@keyframes rainbow {
-0% { color: red; }
-16.67% { color: orange; }
-33.33% { color: yellow; }
-50% { color: green; }
-66.67% { color: blue; }
-83.33% { color: indigo; }
-100% { color: violet; }
-0% { color: red; }
-16.67% { color: orange; }
-33.33% { color: yellow; }
-50% { color: green; }
-66.67% { color: blue; }
-83.33% { color: indigo; }
-100% { color: violet; }
-}
+
 #codeInput {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 90%; /* ограничиваем ширину поля ввода */
+  margin-bottom: 8px; /* Уменьшили отступ */
+  padding: 8px; /* Уменьшили отступ */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 90%;
 }
+
 #codeButton, #codeSubmit {
-    padding: 10px 10px;
-    margin-top: 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-    max-width: 90%; /* ограничиваем ширину кнопки */
-}
-.button2{
-  margin-top: -100px;
-  margin-left: 100px;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 8px 8px; /* Уменьшили отступы */
+  margin-top: 16px; /* Уменьшили отступ */
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 40px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.5s ease;
-  margin-right: 20px;
+  margin-right: 8px; /* Уменьшили отступ */
+  max-width: 90%; 
 }
-.button3{
-  margin-top: 100px;
-  font-size: 16px;
+
+.button2 {
+  margin-top: -80px; /* Уменьшили значение */
+  margin-left: 80px; /* Уменьшили значение */
+  padding: 8px 16px; /* Уменьшили отступы */
+  font-size: 13px; /* Уменьшили размер шрифта */
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 40px;
+  border-radius: 32px; /* Уменьшили радиус */
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  margin-right: 16px; /* Уменьшили отступ */
+}
+
+.button3 {
+  margin-top: 80px; /* Изменили значение */
+  font-size: 13px; /* Уменьшили размер шрифта */
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 32px; /* Уменьшили радиус */
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
+
 #inventory, .shop1, .inventory1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 8px;
-    z-index: 1;
-    display: none;
-    max-width: 90%; /* ограничиваем ширину модальных окон */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 16px; /* Уменьшили отступы */
+  border-radius: 8px;
+  z-index: 1;
+  display: none;
 }
+
 .item {
   display: inline-block;
-  margin: 5px;
+  margin: 4px; /* Уменьшили отступ */
   text-align: center;
   cursor: pointer;
 }
+
 .item img {
-  width: 50px;
-  height: 50px;
-}
-.item span {
-  display: block;
-  font-size: 12px;
-}
-.skin1 {
-  width: 50px;
-  cursor: pointer;
-  margin: 10px;
-}
-.skin2 {
-  width: 50px;
-  cursor: pointer;
-  margin: 10px;
-}
-.message-box1 {
-   margin: 10px;
-   display: none;
+  width: 40px; /* Уменьшили размер изображения */
+  height: 40px; /* Уменьшили размер изображения */
 }
 
+.item span {
+  display: block;
+  font-size: 10px; /* Уменьшили размер шрифта */
+}
+
+.skin1, .skin2 {
+  width: 40px; /* Уменьшили размер изображений */
+  cursor: pointer;
+  margin: 8px; /* Уменьшили отступ */
+}
+
+.message-box1 {
+  margin: 8px; /* Уменьшили отступ */
+  display: none;
+}
 
 </style>
 </head>
