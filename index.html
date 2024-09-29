@@ -440,6 +440,12 @@ codeSubmit.addEventListener('click', () => {
     saveCoins();
     codeMenu.style.display = 'none';
     showMessage('Код успешно активирован!', 'success-message');
+  } else if (code === 'Nsmwl72-:1?Loaoai') {
+    coinCount += 1000000;
+    coinDisplay.textContent = `Монеток: ${coinCount.toFixed(1)}`;
+    saveCoins();
+    codeMenu.style.display = 'none';
+    showMessage('Код успешно активирован!', 'success-message');
   } else {
     showMessage('Неверный промокод или он уже был использован!', 'error-message');
   }
