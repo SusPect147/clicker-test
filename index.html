@@ -17,18 +17,15 @@ body {
   transition: background 0.5s ease;
   user-select: none;
   overflow: hidden; 
-  transform: scale(0.8); /* Уменьшаем на 20% */
-  transform-origin: top; /* Устанавливаем точку масштабирования */
 }
-
 #message-container {
   position: fixed;
-  top: 80px; /* Уменьшили значение */
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 8px 16px; /* Уменьшили отступы */
+  padding: 10px 20px;
   border-radius: 5px;
-  font-size: 13px; /* Уменьшили размер шрифта */
+  font-size: 16px;
   z-index: 100;
   opacity: 0;
   transition: opacity 0.5s;
@@ -38,103 +35,136 @@ body {
   background-color: #ff4d4d;
   color: white;
 }
-
 .success-message {
   background-color: #4CAF50;
   color: white;
 }
-
 #coin {
-  font-size: 19px; /* Уменьшили размер шрифта */
-  margin-bottom: 120px; /* Уменьшили отступ */
+  font-size: 24px;
+  margin-bottom: 150px;
+  transition: color 0.5s ease;
+  margin-top: -px;
 }
-
 #upgradeInfo {
-  margin-bottom: -370px; /* Изменили значение */
+  transition: color 0.5s ease;
+  margin-bottom: -460px;
 }
-
 img {
-  width: 120px; /* Уменьшили размер изображения */
+  width: 150px;
+  top: 40%;
   cursor: pointer;
+  outline: none;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
 }
-
+img active {
+  box-shadow: 2px 2px 5px #fc894d;
+}
 button, .clickc, .thema {
-  padding: 8px 16px; /* Уменьшили отступы */
-  font-size: 13px; /* Уменьшили размер шрифта */
+  padding: 10px 20px;
+  font-size: 16px;
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 32px; /* Уменьшили радиус */
+  border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.5s ease;
-  margin: 8px;
+  margin: 5px; /* Уменьшен отступ между кнопками */
   max-width: 90%;
   box-sizing: border-box; 
 }
-
+.clickc {
+  margin-top: 410px;
+  margin-right: 0;
+}
+.thema {
+  margin-top: -390px;
+  margin-left: 320px;
+}
 button:hover {
   background-color: #555;
 }
-
 #codeMenu {
   position: absolute;
-  margin-left: 16px; /* Уменьшили значение */
-  top: 32%;
+  margin-left: 20px;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 24px; /* Уменьшили отступы */
+  padding: 30px;
   border-radius: 5px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   display: none;
-  height: 108px; /* Уменьшили высоту */
+  height: 135px;
+  transition: background 0.5s ease;
 }
-
+#codeMenu::after {
+ content: "Коды:\AWORK_CODES (+10К 🥥)";
+ display: block;
+ margin-top: 0px;
+ text-align: center;
+ white-space: pre-line;
+ font-size: 18px;
+ animation: rainbow 5s linear infinite;
+}
+@keyframes rainbow {
+0% { color: red; }
+16.67% { color: orange; }
+33.33% { color: yellow; }
+50% { color: green; }
+66.67% { color: blue; }
+83.33% { color: indigo; }
+100% { color: violet; }
+0% { color: red; }
+16.67% { color: orange; }
+33.33% { color: yellow; }
+50% { color: green; }
+66.67% { color: blue; }
+83.33% { color: indigo; }
+100% { color: violet; }
+}
 #codeInput {
-  margin-bottom: 8px; /* Уменьшили отступ */
-  padding: 8px; /* Уменьшили отступ */
+  margin-bottom: 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   max-width: 90%;
 }
-
 #codeButton, #codeSubmit {
-  padding: 8px 8px; /* Уменьшили отступы */
-  margin-top: 16px; /* Уменьшили отступ */
+  padding: 10px 10px;
+  margin-top: 20px;
   background-color: #333;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 8px; /* Уменьшили отступ */
+  margin-right: 5px; /* Уменьшен отступ между кнопками */
   max-width: 90%; 
 }
-
 .button2 {
-  margin-top: -80px; /* Уменьшили значение */
-  margin-left: 80px; /* Уменьшили значение */
-  padding: 8px 16px; /* Уменьшили отступы */
-  font-size: 13px; /* Уменьшили размер шрифта */
+  margin-top: -100px;
+  margin-left: 5px; /* Уменьшен отступ между кнопками */
+  padding: 10px 20px;
+  font-size: 16px;
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 32px; /* Уменьшили радиус */
+  border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.5s ease;
-  margin-right: 16px; /* Уменьшили отступ */
+  margin-right: 5px; /* Уменьшен отступ между кнопками */
 }
-
 .button3 {
-  margin-top: 80px; /* Изменили значение */
-  font-size: 13px; /* Уменьшили размер шрифта */
+  margin-top: 100px;
+  font-size: 16px;
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 32px; /* Уменьшили радиус */
+  border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.5s ease;
+  margin-right: 5px; /* Уменьшен отступ между кнопками */
 }
-
 #inventory, .shop1, .inventory1 {
   position: absolute;
   top: 50%;
@@ -142,39 +172,40 @@ button:hover {
   transform: translate(-50%, -50%);
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  padding: 16px; /* Уменьшили отступы */
+  padding: 20px;
   border-radius: 8px;
   z-index: 1;
   display: none;
 }
-
 .item {
   display: inline-block;
-  margin: 4px; /* Уменьшили отступ */
+  margin: 5px;
   text-align: center;
   cursor: pointer;
 }
-
 .item img {
-  width: 40px; /* Уменьшили размер изображения */
-  height: 40px; /* Уменьшили размер изображения */
+  width: 50px;
+  height: 50px;
 }
-
 .item span {
   display: block;
-  font-size: 10px; /* Уменьшили размер шрифта */
+  font-size: 12px;
 }
-
-.skin1, .skin2 {
-  width: 40px; /* Уменьшили размер изображений */
+.skin1 {
+  width: 50px;
   cursor: pointer;
-  margin: 8px; /* Уменьшили отступ */
+  margin: 10px;
+}
+.skin2 {
+  width: 50px;
+  cursor: pointer;
+  margin: 10px;
+}
+.message-box1 {
+   margin: 10px;
+   display: none;
 }
 
-.message-box1 {
-  margin: 8px; /* Уменьшили отступ */
-  display: none;
-}
 
 </style>
 </head>
