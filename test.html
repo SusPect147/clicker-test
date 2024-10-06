@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кнопки-картинки</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Borsok&display=swap"> <!-- Подключение шрифта Borsok -->
+    <style>
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #0784eb, #ff17ec); 
+        }
+        .container228 {
+            display: flex;
+            height: var(--container-height);
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border: 5px solid transparent; 
+            background: rgb(255, 255, 255);
+            background-clip: padding-box, border-box;
+            border-image: linear-gradient(to right, #3107eb, #7a0470) 1;
+            margin-top: 400px;
+        }
+        .button228 {
+            background-color: transparent;
+            border-radius: 5px;
+            height: var(--button-height);
+            cursor: pointer;
+            margin: 0 5px;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            transition: brightness 0.2s;
+        }
+        .button228 img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+            border-radius: 10px;
+        }
+        .button228:hover img {
+            transform: scale(1.1);
+        }
+        .button228-text {
+            margin-top: 2.5px;
+            font-size: 20px;
+            color: rgb(35, 139, 230);
+            font-family: 'Borsok', sans-serif;
+        }
+        .mini-buttons {
+            display: none; 
+            flex-direction: row; 
+            margin-bottom: 5px;
+        }
+        .mini-button {
+            background-color: #9370DB;
+            border: none; 
+            border-radius: 5px;
+            padding: 5px 10px; 
+            margin: 0 2px;
+            cursor: pointer;
+            color: white;
+            transition: filter 0.2s; 
+            height: auto; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container228">
+    <div class="button228" onclick="toggleMiniButtons(this)">
+        <img src="image1.jpg" alt="Подарки дня">
+        <div class="button228-text">Подарки дня</div>
+    </div>
+    <div class="button228" onclick="toggleMiniButtons(this)">
+        <img src="image2.jpg" alt="Коды">
+        <div class="button228-text">ПРОкачка</div>
+    </div>
+    <div class="button228" onclick="toggleMiniButtons(this)">
+        <img src="image3.jpg" alt="Задания">
+        <div class="button228-text">Задания</div>
+    </div>
+    <div class="button228" onclick="toggleMiniButtons(this)">
+        <img src="image4.jpg" alt="ПРОкачки">
+        <div class="button228-text">Инвентарь
+        </div>
+        <div class="mini-buttons">
+            <button class="mini-button">Предметы</button>
+            <button class="mini-button">Скины</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleMiniButtons(button228) {
+        // Убираем мини-кнопки от всех кнопок
+        document.querySelectorAll('.button228.active').forEach(function(b) {
+            if (b !== button228) {
+                b.classList.remove('active');
+                b.querySelector('.mini-buttons').style.display = 'none';
+            }
+        });
+        // Переключаем мини-кнопки для выбранной кнопки
+        const miniButtons = button228.querySelector('.mini-buttons');
+        miniButtons.style.display = miniButtons.style.display === 'none' ? 'flex' : 'none';
+        button228.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>

@@ -100,14 +100,14 @@ body {
   font-size: 24px;
   margin-bottom: 150px;
   transition: color 0.5s ease;
-  margin-top: -20px;
+  margin-top: -px;
 }
 #upgradeInfo {
   transition: color 0.5s ease;
   margin-bottom: -460px;
 }
 img {
-  width: 250px;
+  width: 150px;
   top: 40%;
   cursor: pointer;
   outline: none;
@@ -134,33 +134,138 @@ button, .clickc, .thema {
   margin-top: 410px;
   margin-right: 0;
 }
+.thema {
+  margin-top: -390px;
+  margin-left: 320px;
+}
+button:hover {
+  background-color: #555;
+}
+#codeMenu {
+  position: absolute;
+  margin-left: 20px;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: none;
+  height: 135px;
+  transition: background 0.5s ease;
+}
+#codeMenu::after {
+ content: "Коды:\AWORK_CODES (+10К 🥥)";
+ display: block;
+ margin-top: 0px;
+ text-align: center;
+ white-space: pre-line;
+ font-size: 18px;
+ animation: rainbow 5s linear infinite;
+}
+@keyframes rainbow {
+0% { color: red; }
+16.67% { color: orange; }
+33.33% { color: yellow; }
+50% { color: green; }
+66.67% { color: blue; }
+83.33% { color: indigo; }
+100% { color: violet; }
+0% { color: red; }
+16.67% { color: orange; }
+33.33% { color: yellow; }
+50% { color: green; }
+66.67% { color: blue; }
+83.33% { color: indigo; }
+100% { color: violet; }
+}
+#codeInput {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 90%;
+}
+#codeButton, #codeSubmit {
+  padding: 10px 10px;
+  margin-top: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px; /* Уменьшен отступ между кнопками */
+  max-width: 90%; 
+}
+
+#inventory, .shop1, .inventory1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1;
+  display: none;
+}
+.item {
+  display: inline-block;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+.item img {
+  width: 50px;
+  height: 50px;
+}
+.item span {
+  display: block;
+  font-size: 12px;
+}
+.skin1 {
+  width: 50px;
+  cursor: pointer;
+  margin: 10px;
+}
+.skin2 {
+  width: 50px;
+  cursor: pointer;
+  margin: 10px;
+}
+.message-box1 {
+   margin: 10px;
+   display: none;
+}
+
 
 </style>
 </head>
 <body>
 <div id="message-container"></div>
 <div id="coin"> 🥥0</div>
-<img id="coinImage" src="image.png" />
-
+<div id="inventory">
+    <h2>Инвентарь</h2>
+    <div id="items"></div>
+  </div>
+  <button id="inventoryButton">Инвентарь предметов</button>
 <div class="container228">
       <div class="button228" onclick="toggleMiniButtons(this)">
           <img src="image1.jpg" alt="Подарки дня">
           <div class="button228-text">Подарки дня</div>
       </div>
       <div class="button228" onclick="toggleMiniButtons(this)">
-          <img src="image2.jpg" alt="ПРОкачка">
-          <div class="button228-text">Магазин</div>
-          <div class="mini-buttons">
-            <button class="mini-button"   id="prokachka">ПРОкачка</button>
-            <button class="mini-button">Скины</button>
-        </div>
+          <img src="image2.jpg" alt="Коды">
+          <div class="button228-text">ПРОкачка</div>
       </div>
       <div class="button228" onclick="toggleMiniButtons(this)">
           <img src="image3.jpg" alt="Задания">
           <div class="button228-text">Задания</div>
       </div>
       <div class="button228" onclick="toggleMiniButtons(this)">
-          <img src="image4.jpg" alt="Инвентарь">
+          <img src="image4.jpg" alt="ПРОкачки">
           <div class="button228-text">Инвентарь
           </div>
           <div class="mini-buttons">
@@ -168,7 +273,7 @@ button, .clickc, .thema {
               <button class="mini-button">Скины</button>
           </div>
       </div>
-</div>
+  </div>
 <script>
 function saveCoins() {
 localStorage.setItem('coinCount', coinCount);
@@ -206,6 +311,8 @@ codeUsed6 = localStorage.getItem('codeUsed6') === 'true' || false;
 codeUsed7 = localStorage.getItem('codeUsed7') === 'true' || false;
 skinbuying = localStorage.getItem('codeUsed7') === 'true' || false;
 localStorage.setItem('skinbuying', skinbuying);coinDisplay.textContent = `🥥${coinCount.toFixed(1)}`;
+upgradeInfoDisplay.textContent = `Стоимость прокачки: ${upgradePrice} 🥥`;
+upgradeInfoDisplay2.textContent = `Стоимость прокачки: ${upgradePrice2} 🥥`;
 const storedItems = localStorage.getItem('items');
 return storedItems ? JSON.parse(storedItems) : [];
 
@@ -215,13 +322,6 @@ mythic = parseFloat(localStorage.getItem('mythic')) || 0.0001;
 legendary = parseFloat(localStorage.getItem('legendary')) || 0.00001;
 secret = parseFloat(localStorage.getItem('secret')) || 0.000001;
 }
-
-document.getElementById('prokachka').addEventListener('click', function() {
-        // Замените URL ниже на нужный Вам адрес
-        window.location.href = 'http://127.0.0.1:5500/PROkachka.html';
-});
-
-  
 let coinCount = 0;
 let clickValue = 1;
 let upgradePrice = 100;
@@ -240,6 +340,7 @@ let secret =    0.000001;
 let upgradePrice2 = 500;
 const coinDisplay = document.getElementById('coin');
 const coinImage = document.getElementById('coinImage');
+const themeButton = document.getElementById('themeButton');
 const upgradeButton = document.getElementById('upgradeButton');
 const upgradeButton2 = document.getElementById('upgradeButton2');
 const upgradeInfoDisplay = document.getElementById('upgradeInfo');
@@ -257,11 +358,11 @@ const shop1 = document.getElementById('shop1');
 
 loadCoins();
 
-coinImage.addEventListener('click', () => {
-  coinCount += clickValue;
-  coinDisplay.textContent = `🥥${coinCount.toFixed(1)}`;
-  saveCoins();
-});
+document.getElementById('shopButton2').addEventListener('click', function() {
+            // Здесь Вы можете использовать url, на который хотите перейти
+            window.location.href = 'http://127.0.0.1:5500/PROkachka.html'; // Замените на нужный URL
+        });
+
 function toggleMiniButtons(button228) {
         // Убираем мини-кнопки от всех кнопок
         document.querySelectorAll('.button228.active').forEach(function(b) {
